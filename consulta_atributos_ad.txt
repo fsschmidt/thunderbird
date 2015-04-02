@@ -1,0 +1,12 @@
+Set objShell = CreateObject("WScript.Shell")
+Set objUserEnv = objShell.Environment("USER")
+Set objADSysInfo = CreateObject("ADSystemInfo")
+Set objUser = GetObject("LDAP://" & objADSysInfo.UserName)
+' This will create the variable %first.last% for the first.lastname
+objUserEnv("first.last") = objUser.givenName & "." & objUser.sn
+' This will create the variable %first% for the first name
+objUserEnv("first") = objUser.givenName
+' This will create the variable %last% for the surname
+objUserEnv("last") = objUser.sn
+' This will create the variable %mail% for the primary mail address
+objUserEnv("cn") = objUser.mail
