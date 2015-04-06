@@ -1,0 +1,4 @@
+[Reflection.Assembly]::LoadWithPartialName("System.Web") | Out-Null
+$FULLNAME =  ([adsi]"WinNT://dominio.local/$env:USERNAME,user").fullname
+$Encode = [System.Web.HttpUtility]::UrlPathEncode($FULLNAME)
+[Environment]::SetEnvironmentVariable("NOMECOMPLETO", $Encode, "USER")
